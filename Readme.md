@@ -24,6 +24,14 @@ Breakdown:
 Given a input specification an acceptable solution complexity can be deduced.
 
 ### Input Range
+
  **0- 10^4**: log(n), nlog(n), n, n^2
+
   **0- 10^8**: log(n), nlog(n), n
+
   **n>10^8**: log(n), nlog(n)
+
+
+## References
+
+* Leet Graph visualizer: https://solomk.in/leetcode-tree-visualizer

@@ -39,29 +39,66 @@ from functools import cache
     
 
 
-class Solution:
+# class Solution:
 
+
+#     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
+#         n = len(text1)
+#         m = len(text2)
+#         dp = [[0] * (m+1) for _ in range(n+1)]
+#         for i in range(1, n+1):
+#             for j in range(1, m+1):
+#                 if(text1[i-1] == text2[j-1]):
+#                     dp[i][j] = dp[i-1][j-1]+1
+#                 else:
+#                     dp[i][j]=max(dp[i-1][j],dp[i][j-1])
+#         return dp[n][m]
+        
+
+class Solution:
 
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
         n = len(text1)
         m = len(text2)
-        dp = [[0] * (m+1) for _ in range(n+1)]
-        for i in range(1, n+1):
-            for j in range(1, m+1):
-                if(text1[i-1] == text2[j-1]):
-                    dp[i][j] = dp[i-1][j-1]+1
+        p = [0] * (m + 1)
+
+        for i in range(1, n + 1):
+            c = [0] * (m + 1)
+            for j in range(1, m + 1):
+                if text1[i - 1] == text2[j - 1]:
+                    c[j] = p[j - 1] + 1
                 else:
-                    dp[i][j]=max(dp[i-1][j],dp[i][j-1])
-        return dp[n][m]
-        
+                    c[j] = max(p[j], c[j - 1])
+            p = c
+        return c[m]
 
 
 s = Solution()
 
-print(s.longestCommonSubsequence("abcde", "abce"))
-# s = Solution()
-# print(s.longestCommonSubsequence("abc", "abc"))
-# s = Solution()
-# print(s.longestCommonSubsequence("abc", "def"))
-# s = Solution()
-# print(s.longestCommonSubsequence("hofubmnylkra", "pqhgxgdofcvmr"))
+# Example 1:
+
+# Input: text1 = "abcde", text2 = "ace"
+# Output: 3
+# Explanation: The longest common subsequence is "ace" and its length is 3.
+
+print(s.longestCommonSubsequence("abcde", "ace"))
+# Example 2:
+
+# Input: text1 = "abc", text2 = "abc"
+# Output: 3
+# Explanation: The longest common subsequence is "abc" and its length is 3.
+print(s.longestCommonSubsequence("abc", "abc"))
+
+# Example 3:
+
+# Input: text1 = "abc", text2 = "def"
+# Output: 0
+# Explanation: There is no such common subsequence, so the result is 0.
+print(s.longestCommonSubsequence("abc", "def"))
+
+# 2
+print(s.longestCommonSubsequence("oxcpqrsvwf", "shmtulqrypy"))
+
+# 5
+print(s.longestCommonSubsequence("hofubmnylkra", "pqhgxgdofcvmr"))
+

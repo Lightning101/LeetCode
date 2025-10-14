@@ -42,6 +42,32 @@ class Solution:
             output.append(left[i] * right[i])
         return output
 
+# 14-10-2025
+class Solution:
+    def productExceptSelf(self, nums: list[int]) -> list[int]:
+        main = 1
+        zeroCount = 0
+        for n in nums:
+            if n != 0:
+                main *= n
+            zeroCount += n == 0
+
+        if zeroCount == 0:
+            for i, v in enumerate(nums):
+                nums[i] = 0 if (v == 0) else main // v
+        elif zeroCount == 1:
+            for i, v in enumerate(nums):
+                nums[i] = main if (v == 0) else 0
+        else:
+            nums[:] = [0 for _ in range(len(nums))]
+        return nums
+
+
+s = Solution()
+
+
+print(s.productExceptSelf([0, 0]))
+
 
 s = Solution()
 # Example 1:
